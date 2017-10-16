@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace Clock
 {
@@ -30,6 +25,7 @@ namespace Clock
         //Drawing Tools
         Pen myPen;
         Graphics myGraphic;
+        Brush myBrush;
 
         public Canvas()
         {
@@ -65,6 +61,13 @@ namespace Clock
                 BackgroundImage = Image.FromFile(openFileDialog.FileName);
 
             }
+        }
+
+        private void Options_Click(object sender, EventArgs e)
+        {
+            OptionForm optionForm = new OptionForm();
+
+            optionForm.Show();
         }
 
         private void Update_Time()
@@ -105,12 +108,13 @@ namespace Clock
             Update_Time();
             this.Refresh();
 
-            //Center Point of Form
-            centerPoint = new Point(this.ClientRectangle.Width / 2, this.ClientRectangle.Height / 2);
-
             //Get Utilities
             myPen = new Pen(Color.Black);
+            myPen.Width = 2;
             myGraphic = this.CreateGraphics();
+
+            //Center Point of Form (updated because of resizes)
+            centerPoint = new Point(this.ClientRectangle.Width / 2, this.ClientRectangle.Height / 2);
 
             //Draw Circle
             myGraphic.DrawEllipse(myPen, new Rectangle(centerPoint.X - radius, centerPoint.Y - radius, diameter, diameter));
@@ -118,18 +122,24 @@ namespace Clock
             //Each second = 6 degrees (same for minute)
             int degrees = seconds * 6;
             Compute_Hand_Coordinates(degrees, secondsL);
+            myPen.Brush = Brushes.CornflowerBlue;
             myGraphic.DrawLine(myPen, centerPoint.X, centerPoint.Y, (float)coordinates[0], (float)coordinates[1]);
 
             //Draw Minute Line
             degrees = minutes * 6;
             Compute_Hand_Coordinates(degrees,  minutesL);
+            myPen.Brush = Brushes.DarkOrchid;
             myGraphic.DrawLine(myPen, centerPoint.X, centerPoint.Y, (float)coordinates[0], (float)coordinates[1]);
 
             //Draw Hour Line
             //Each hour = 30 degrees
             degrees = (hours % 12) * 30;
             Compute_Hand_Coordinates(degrees, hoursL);
+            myPen.Brush = Brushes.Firebrick;
             myGraphic.DrawLine(myPen, centerPoint.X, centerPoint.Y, (float)coordinates[0], (float)coordinates[1]);
+
+            //Draw small center Circle
+            myGraphic.FillEllipse(Brushes.Black, new Rectangle(centerPoint.X - 5, centerPoint.Y - 5, 10, 10));
 
             //Dispose of Tools
             myGraphic.Dispose();

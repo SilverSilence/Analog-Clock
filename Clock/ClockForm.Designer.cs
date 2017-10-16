@@ -30,6 +30,7 @@
         {
             this.Background = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.Options = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Background
@@ -49,11 +50,23 @@
             this.openFileDialog.Filter = "*.png | *.jpg";
             this.openFileDialog.InitialDirectory = "D:\\Bilder\\Bilder\\InternetStuff\\Backgrounds";
             // 
+            // Options
+            // 
+            this.Options.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.Options.Location = new System.Drawing.Point(0, 363);
+            this.Options.Name = "Options";
+            this.Options.Size = new System.Drawing.Size(695, 23);
+            this.Options.TabIndex = 1;
+            this.Options.Text = "Options";
+            this.Options.UseVisualStyleBackColor = true;
+            this.Options.Click += new System.EventHandler(this.Options_Click);
+            // 
             // Canvas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(695, 409);
+            this.Controls.Add(this.Options);
             this.Controls.Add(this.Background);
             this.DoubleBuffered = true;
             this.Name = "Canvas";
@@ -67,6 +80,7 @@
 
         private System.Windows.Forms.Button Background;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.Button Options;
     }
 }
 
