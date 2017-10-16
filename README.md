@@ -15,6 +15,6 @@ Small Project in C# to get used to creating Forms etc.
 
 ---
 
-![Image](https://imgur.com/YtRVnyr)
+![Image](https://imgur.com/YtRVnyr.png)
 
-![Image](https://imgur.com/ry1VnDM)
+![Image](https://imgur.com/ry1VnDM.png)
