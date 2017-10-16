@@ -146,7 +146,8 @@ namespace Clock
             myGraphic.DrawLine(myPen, centerPoint.X, centerPoint.Y, (float)coordinates[0], (float)coordinates[1]);
 
             //Draw Hour Hand - Each hour = 30 degrees
-            degrees = (hours % 12) * 30;
+            //Make that in 1h -> 30/60 = 0.5 degrees per minute -> 1 degree per 2 minutes
+            degrees = ((hours % 12) * 60 + minutes) / 2;
             Compute_Hand_Coordinates(degrees, hoursL);
             myPen.Color = Color.FromArgb(Properties.Settings.Default.HourHandColor);
             myPen.Width = Properties.Settings.Default.HourWidth;
