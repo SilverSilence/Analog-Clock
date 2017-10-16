@@ -2,6 +2,8 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.Configuration;
+using System.IO;
+using System.Drawing.Imaging;
 
 namespace Clock
 {
@@ -50,17 +52,16 @@ namespace Clock
             Update_Time();
         }
 
-
-
         private void background_Click(object sender, EventArgs e)
         {
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string fileToOpen = openFileDialog.FileName;
 
-                System.IO.FileInfo File = new System.IO.FileInfo(openFileDialog.FileName);
+                FileInfo File = new FileInfo(openFileDialog.FileName);
                 BackgroundImage = Image.FromFile(openFileDialog.FileName);
-
+                Properties.Settings.Default.ImagePath = File.FullName;
+                Properties.Settings.Default.Save();
             }
         }
 
@@ -69,6 +70,24 @@ namespace Clock
             OptionForm optionForm = new OptionForm();
 
             optionForm.Show();
+        }
+
+        private void Canvas_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.WindowSize = Size;
+            Properties.Settings.Default.WindowLocation = Location;
+            Properties.Settings.Default.Save();
+        }
+
+        private void Canvas_Load(object sender, EventArgs e)
+        {
+            Size = Properties.Settings.Default.WindowSize;
+            Location = Properties.Settings.Default.WindowLocation;
+            if (Properties.Settings.Default.ImagePath.Length > 0)
+            {
+                BackgroundImage = Image.FromFile(Properties.Settings.Default.ImagePath);
+            }
+            Properties.Settings.Default.Save();
         }
 
         private void Update_Time()

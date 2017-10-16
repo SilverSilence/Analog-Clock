@@ -47,7 +47,7 @@
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog";
-            this.openFileDialog.Filter = "*.png | *.jpg";
+            this.openFileDialog.Filter = "Image Files (*.png; *.jpg; *.jpeg) | *.png; *.jpg; *.jpeg;";
             this.openFileDialog.InitialDirectory = "D:\\Bilder\\Bilder\\InternetStuff\\Backgrounds";
             // 
             // Options
@@ -71,6 +71,8 @@
             this.DoubleBuffered = true;
             this.Name = "Canvas";
             this.Text = "Canvas";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Canvas_FormClosing);
+            this.Load += new System.EventHandler(this.Canvas_Load);
             this.ResumeLayout(false);
 
         }
