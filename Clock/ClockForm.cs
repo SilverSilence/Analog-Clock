@@ -111,9 +111,10 @@ namespace Clock
             //Compute coordinates
             Compute_Hand_Coordinates(degrees, secondsL);
 
-            //Set Color
+            //Set Color & Brush Width
             myPen.Color = Color.FromArgb(Properties.Settings.Default.SecHandColor);
             myPen.Width = Properties.Settings.Default.SecWidth;
+            
             //Draw Second Hand
             myGraphic.DrawLine(myPen, centerPoint.X, centerPoint.Y, (float)coordinates[0], (float)coordinates[1]);
 
@@ -144,7 +145,7 @@ namespace Clock
 
             //Center Point of Form (updated because of resizes)
             centerPoint = new Point(this.ClientRectangle.Width / 2, this.ClientRectangle.Height / 2);
-            this.pa
+
             //Draw Circle
             myGraphic.DrawEllipse(myPen, new Rectangle(centerPoint.X - radius, centerPoint.Y - radius, diameter, diameter));
 
@@ -152,7 +153,8 @@ namespace Clock
             Draw_Hands();
 
             //Draw small center Circle
-            myGraphic.FillEllipse(Brushes.Black, new Rectangle(centerPoint.X - 5, centerPoint.Y - 5, 10, 10));
+            myBrush = new SolidBrush(Color.FromArgb(Properties.Settings.Default.BorderColor));
+            myGraphic.FillEllipse(myBrush, new Rectangle(centerPoint.X - 5, centerPoint.Y - 5, 10, 10));
 
             //Dispose of Tools
             myGraphic.Dispose();

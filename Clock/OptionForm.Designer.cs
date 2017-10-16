@@ -34,7 +34,7 @@
             this.MinHandColorButton = new System.Windows.Forms.Button();
             this.SecHandColorButton = new System.Windows.Forms.Button();
             this.Transparency = new System.Windows.Forms.Label();
-            this.Width = new System.Windows.Forms.Label();
+            this.LabelWidth = new System.Windows.Forms.Label();
             this.Border = new System.Windows.Forms.Label();
             this.Hour = new System.Windows.Forms.Label();
             this.Minute = new System.Windows.Forms.Label();
@@ -45,13 +45,13 @@
             this.NumericInputMin = new System.Windows.Forms.NumericUpDown();
             this.NumericInputHour = new System.Windows.Forms.NumericUpDown();
             this.NumericInputBorder = new System.Windows.Forms.NumericUpDown();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.TransparencyBar = new System.Windows.Forms.TrackBar();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumericInputSec)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumericInputMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumericInputHour)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumericInputBorder)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TransparencyBar)).BeginInit();
             this.SuspendLayout();
             // 
             // BorderColorButton
@@ -110,16 +110,16 @@
             this.Transparency.Text = "Transparency";
             this.Transparency.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Width
+            // LabelWidth
             // 
-            this.Width.BackColor = System.Drawing.SystemColors.Control;
-            this.Width.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Width.Location = new System.Drawing.Point(3, 27);
-            this.Width.Name = "Width";
-            this.Width.Size = new System.Drawing.Size(100, 23);
-            this.Width.TabIndex = 0;
-            this.Width.Text = "Width";
-            this.Width.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LabelWidth.BackColor = System.Drawing.SystemColors.Control;
+            this.LabelWidth.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelWidth.Location = new System.Drawing.Point(3, 27);
+            this.LabelWidth.Name = "LabelWidth";
+            this.LabelWidth.Size = new System.Drawing.Size(100, 23);
+            this.LabelWidth.TabIndex = 0;
+            this.LabelWidth.Text = "Width";
+            this.LabelWidth.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Border
             // 
@@ -189,7 +189,7 @@
             this.tableLayoutPanel1.Controls.Add(this.Minute, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.Hour, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.Border, 4, 0);
-            this.tableLayoutPanel1.Controls.Add(this.Width, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.LabelWidth, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.Transparency, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.SecHandColorButton, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.MinHandColorButton, 2, 2);
@@ -199,7 +199,7 @@
             this.tableLayoutPanel1.Controls.Add(this.NumericInputMin, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.NumericInputHour, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.NumericInputBorder, 4, 1);
-            this.tableLayoutPanel1.Controls.Add(this.trackBar1, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.TransparencyBar, 1, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -210,7 +210,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(784, 111);
             this.tableLayoutPanel1.TabIndex = 0;
-            this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
             // NumericInputSec
             // 
@@ -332,12 +331,16 @@
             0});
             this.NumericInputBorder.ValueChanged += new System.EventHandler(this.NumericInput_ValueChanged);
             // 
-            // trackBar1
+            // TransparencyBar
             // 
-            this.trackBar1.Location = new System.Drawing.Point(159, 84);
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(150, 24);
-            this.trackBar1.TabIndex = 15;
+            this.tableLayoutPanel1.SetColumnSpan(this.TransparencyBar, 4);
+            this.TransparencyBar.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.TransparencyBar.Location = new System.Drawing.Point(159, 84);
+            this.TransparencyBar.Maximum = 255;
+            this.TransparencyBar.Name = "TransparencyBar";
+            this.TransparencyBar.Size = new System.Drawing.Size(622, 24);
+            this.TransparencyBar.TabIndex = 15;
+            this.TransparencyBar.ValueChanged += new System.EventHandler(this.TransparencyBar_ValueChanged);
             // 
             // OptionForm
             // 
@@ -353,7 +356,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumericInputMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumericInputHour)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumericInputBorder)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TransparencyBar)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -365,7 +368,7 @@
         private System.Windows.Forms.Button MinHandColorButton;
         private System.Windows.Forms.Button SecHandColorButton;
         private System.Windows.Forms.Label Transparency;
-        private System.Windows.Forms.Label Width;
+        private System.Windows.Forms.Label LabelWidth;
         private System.Windows.Forms.Label Border;
         private System.Windows.Forms.Label Hour;
         private System.Windows.Forms.Label Minute;
@@ -376,6 +379,6 @@
         private System.Windows.Forms.NumericUpDown NumericInputMin;
         private System.Windows.Forms.NumericUpDown NumericInputHour;
         private System.Windows.Forms.NumericUpDown NumericInputBorder;
-        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.TrackBar TransparencyBar;
     }
 }

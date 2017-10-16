@@ -38,17 +38,42 @@ namespace Clock
             }
         }
 
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void NumericInput_ValueChanged(object sender, EventArgs e)
         {
             NumericUpDown nIn = (NumericUpDown)sender;
             string name = nIn.Name.Replace("NumericInput", "");
             name += "Width";
             Properties.Settings.Default[name] = (float) nIn.Value;
+            Properties.Settings.Default.Save();
+        }
+
+        private void TransparencyBar_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Transparency = TransparencyBar.Value;
+            Color someColor;
+            int secColor =  Properties.Settings.Default.SecHandColor;
+            int minColor =  Properties.Settings.Default.MinHandColor;
+            int hourColor = Properties.Settings.Default.HourHandColor;
+            int borderColor = Properties.Settings.Default.BorderColor;
+
+            int transparency = Properties.Settings.Default.Transparency;
+            //Sec Color
+            someColor = System.Drawing.Color.FromArgb(secColor);
+            someColor = System.Drawing.Color.FromArgb(transparency, someColor);
+            Properties.Settings.Default.SecHandColor = someColor.ToArgb();
+            //Min Color
+            someColor = System.Drawing.Color.FromArgb(minColor);
+            someColor = System.Drawing.Color.FromArgb(transparency, someColor);
+            Properties.Settings.Default.MinHandColor = someColor.ToArgb();
+            //Hour Color
+            someColor = System.Drawing.Color.FromArgb(hourColor);
+            someColor = System.Drawing.Color.FromArgb(transparency, someColor);
+            Properties.Settings.Default.HourHandColor = someColor.ToArgb();
+            //Border Color
+            someColor = System.Drawing.Color.FromArgb(borderColor);
+            someColor = System.Drawing.Color.FromArgb(transparency, someColor);
+            Properties.Settings.Default.BorderColor = someColor.ToArgb();
+            //Save
             Properties.Settings.Default.Save();
         }
     }

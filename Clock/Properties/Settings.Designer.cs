@@ -86,9 +86,9 @@ namespace Clock.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public float Transparency {
+        public int Transparency {
             get {
-                return ((float)(this["Transparency"]));
+                return ((int)(this["Transparency"]));
             }
             set {
                 this["Transparency"] = value;
