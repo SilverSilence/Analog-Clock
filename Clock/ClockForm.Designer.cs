@@ -71,7 +71,6 @@
             this.DoubleBuffered = true;
             this.Name = "Canvas";
             this.Text = "Canvas";
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Canvas_Paint);
             this.ResumeLayout(false);
 
         }

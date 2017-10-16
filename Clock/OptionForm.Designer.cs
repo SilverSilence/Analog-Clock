@@ -340,6 +340,7 @@
             this.TransparencyBar.Name = "TransparencyBar";
             this.TransparencyBar.Size = new System.Drawing.Size(622, 24);
             this.TransparencyBar.TabIndex = 15;
+            this.TransparencyBar.Value = 255;
             this.TransparencyBar.ValueChanged += new System.EventHandler(this.TransparencyBar_ValueChanged);
             // 
             // OptionForm

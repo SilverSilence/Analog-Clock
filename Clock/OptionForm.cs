@@ -15,6 +15,14 @@ namespace Clock
         public OptionForm()
         {
             InitializeComponent();
+
+            //Load Settings into boxes
+            NumericInputBorder.Value = (decimal) Properties.Settings.Default.BorderWidth;
+            NumericInputSec.Value = (decimal) Properties.Settings.Default.SecWidth;
+            NumericInputMin.Value = (decimal) Properties.Settings.Default.MinWidth;
+            NumericInputHour.Value = (decimal) Properties.Settings.Default.HourWidth;
+
+            TransparencyBar.Value = Properties.Settings.Default.Transparency;
         }
 
         //Reusing Handler for all button. Distinguishing by sender.

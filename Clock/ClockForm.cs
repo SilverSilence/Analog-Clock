@@ -35,7 +35,6 @@ namespace Clock
             
             //Init array
             coordinates = new double[2];
-
             
             //Set diamater and init indicators
             diameter = 2 * radius;
@@ -50,6 +49,8 @@ namespace Clock
 
             Update_Time();
         }
+
+
 
         private void background_Click(object sender, EventArgs e)
         {
@@ -159,11 +160,6 @@ namespace Clock
             //Dispose of Tools
             myGraphic.Dispose();
             myPen.Dispose();
-        }
-
-        private void Canvas_Paint(object sender, PaintEventArgs e)
-        {
-            
         }
     }
 }
