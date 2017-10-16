@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-
+using System.Configuration;
 
 namespace Clock
 {
@@ -103,40 +103,53 @@ namespace Clock
             coordinates[1] = newY;
         }
 
+        private void Draw_Hands()
+        {
+            //Draw Second Hand - Each second = 6 degrees (same for minute)
+            int degrees = seconds * 6;
+            
+            //Compute coordinates
+            Compute_Hand_Coordinates(degrees, secondsL);
+
+            //Set Color
+            myPen.Color = Color.FromArgb(Properties.Settings.Default.SecHandColor);
+            myPen.Width = Properties.Settings.Default.SecWidth;
+            //Draw Second Hand
+            myGraphic.DrawLine(myPen, centerPoint.X, centerPoint.Y, (float)coordinates[0], (float)coordinates[1]);
+
+            //Draw Minute Hand the same way
+            degrees = minutes * 6;
+            Compute_Hand_Coordinates(degrees, minutesL);
+            myPen.Color = Color.FromArgb(Properties.Settings.Default.MinHandColor);
+            myPen.Width = Properties.Settings.Default.MinWidth;
+            myGraphic.DrawLine(myPen, centerPoint.X, centerPoint.Y, (float)coordinates[0], (float)coordinates[1]);
+
+            //Draw Hour Hand - Each hour = 30 degrees
+            degrees = (hours % 12) * 30;
+            Compute_Hand_Coordinates(degrees, hoursL);
+            myPen.Color = Color.FromArgb(Properties.Settings.Default.HourHandColor);
+            myPen.Width = Properties.Settings.Default.HourWidth;
+            myGraphic.DrawLine(myPen, centerPoint.X, centerPoint.Y, (float)coordinates[0], (float)coordinates[1]);
+        }
+
         private void Timer_Tick(object sender, EventArgs e)
         {
             Update_Time();
             this.Refresh();
 
-            //Get Utilities
-            myPen = new Pen(Color.Black);
-            myPen.Width = 2;
+            //Create Utilities
+            myPen = new Pen(Color.FromArgb(Properties.Settings.Default.BorderColor));
             myGraphic = this.CreateGraphics();
+            myPen.Width = Properties.Settings.Default.BorderWidth;
 
             //Center Point of Form (updated because of resizes)
             centerPoint = new Point(this.ClientRectangle.Width / 2, this.ClientRectangle.Height / 2);
-
+            this.pa
             //Draw Circle
             myGraphic.DrawEllipse(myPen, new Rectangle(centerPoint.X - radius, centerPoint.Y - radius, diameter, diameter));
 
-            //Each second = 6 degrees (same for minute)
-            int degrees = seconds * 6;
-            Compute_Hand_Coordinates(degrees, secondsL);
-            myPen.Brush = Brushes.CornflowerBlue;
-            myGraphic.DrawLine(myPen, centerPoint.X, centerPoint.Y, (float)coordinates[0], (float)coordinates[1]);
-
-            //Draw Minute Line
-            degrees = minutes * 6;
-            Compute_Hand_Coordinates(degrees,  minutesL);
-            myPen.Brush = Brushes.DarkOrchid;
-            myGraphic.DrawLine(myPen, centerPoint.X, centerPoint.Y, (float)coordinates[0], (float)coordinates[1]);
-
-            //Draw Hour Line
-            //Each hour = 30 degrees
-            degrees = (hours % 12) * 30;
-            Compute_Hand_Coordinates(degrees, hoursL);
-            myPen.Brush = Brushes.Firebrick;
-            myGraphic.DrawLine(myPen, centerPoint.X, centerPoint.Y, (float)coordinates[0], (float)coordinates[1]);
+            //Draw Hands
+            Draw_Hands();
 
             //Draw small center Circle
             myGraphic.FillEllipse(Brushes.Black, new Rectangle(centerPoint.X - 5, centerPoint.Y - 5, 10, 10));
